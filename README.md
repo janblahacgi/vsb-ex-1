@@ -11,7 +11,6 @@
   - [1.3. 🔄 Pracovní postup s větvemi `test`, `uat`, `main`](#13--pracovní-postup-s-větvemi-test-uat-main)
     - [1.3.1. 🎯 Cíl](#131--cíl)
     - [1.3.2. 💡 Nápověda](#132--nápověda)
-    - [1.3.3. ✅ Řešení](#133--řešení)
 
 ## 1.2. 🧩 Úkol: Nastavení větví pro prostředí `test`, `uat` a `prod`
 
@@ -69,6 +68,20 @@ origin/uat
 
 A v GitHub Actions se nasazení automaticky spustí při PR do těchto větví.
 
+Ukázkový tok větví může vypadat takto:
+
+```bash
+feature/nova-funkce
+        ↓ PR
+     test (CI/CD na /test)
+        ↓ PR
+     uat (CI/CD na /uat)
+        ↓ PR
+     main (CI/CD na /prod)
+```
+
+Každý krok má svůj build a nasazení. Celý proces je automatizovaný a kontrolovaný přes PR schvalování a testování.
+
 ---
 
 ## 1.3. 🔄 Pracovní postup s větvemi `test`, `uat`, `main`
@@ -111,19 +124,3 @@ Mít jasně definovaný proces vývoje a nasazování přes tři prostředí:
 5. Po schválení UAT vytvoř PR z `uat` do `main` → nasazení do produkce.
 
 ---
-
-### 1.3.3. ✅ Řešení
-
-Ukázkový tok větví může vypadat takto:
-
-```bash
-feature/nova-funkce
-        ↓ PR
-     test (CI/CD na /test)
-        ↓ PR
-     uat (CI/CD na /uat)
-        ↓ PR
-     main (CI/CD na /prod)
-```
-
-Každý krok má svůj build a nasazení. Celý proces je automatizovaný a kontrolovaný přes PR schvalování a testování.

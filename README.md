@@ -33,7 +33,7 @@ Tyto větve se používají v CI/CD pipeline a každé prostředí má svou GitH
 
    ```bash
    git checkout -b main
-   git push -u origin main
+   git push --set-upstream origin main
    ```
 
 2. Vytvoř nové větve pro `test` a `uat`, založené na `main`:
@@ -41,11 +41,11 @@ Tyto větve se používají v CI/CD pipeline a každé prostředí má svou GitH
    ```bash
    git checkout main
    git checkout -b test
-   git push -u origin test
+   git push --set-upstream origin test
 
    git checkout main
    git checkout -b uat
-   git push -u origin uat
+   git push --set-upstream origin uat
    ```
 
 3. Ověř v GitHubu, že větve `test`, `uat` a `main` existují v repozitáři.

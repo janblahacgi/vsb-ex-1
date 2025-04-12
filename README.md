@@ -6,6 +6,7 @@
   - [1.1. TOC](#11-toc)
   - [1.2. 🧩 Úkol: Nastavení větví pro prostředí `test`, `uat` a `prod`](#12--úkol-nastavení-větví-pro-prostředí-test-uat-a-prod)
     - [1.2.1. 🎯 Cíl](#121--cíl)
+  - [Nas](#nas)
     - [1.2.2. 💡 Nápověda](#122--nápověda)
     - [1.2.3. ✅ Řešení](#123--řešení)
   - [1.3. 🔄 Pracovní postup s větvemi `test`, `uat`, `main`](#13--pracovní-postup-s-větvemi-test-uat-main)
@@ -26,6 +27,8 @@ Mít v Git repozitáři připravené tři stabilní větve pro deployment do tř
 Tyto větve se používají v CI/CD pipeline a každé prostředí má svou GitHub Actions workflow, která se spouští při pull requestu do těchto větví.
 
 ---
+
+## Nas
 
 ### 1.2.2. 💡 Nápověda
 

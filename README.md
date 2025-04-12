@@ -1,13 +1,21 @@
-# Cvičení CI-CD
+# 1. Cvičení CI-CD
 
-## TOC
+## 1.1. TOC
 
-- [Cvičení CI-CD](#cvičení-ci-cd)
-  - [TOC](#toc)
+- [1. Cvičení CI-CD](#1-cvičení-ci-cd)
+  - [1.1. TOC](#11-toc)
+  - [1.2. 🧩 Úkol: Nastavení větví pro prostředí `test`, `uat` a `prod`](#12--úkol-nastavení-větví-pro-prostředí-test-uat-a-prod)
+    - [1.2.1. 🎯 Cíl](#121--cíl)
+    - [1.2.2. 💡 Nápověda](#122--nápověda)
+    - [1.2.3. ✅ Řešení](#123--řešení)
+  - [1.3. 🔄 Pracovní postup s větvemi `test`, `uat`, `main`](#13--pracovní-postup-s-větvemi-test-uat-main)
+    - [1.3.1. 🎯 Cíl](#131--cíl)
+    - [1.3.2. 💡 Nápověda](#132--nápověda)
+    - [1.3.3. ✅ Řešení](#133--řešení)
 
-## 🧩 Úkol: Nastavení větví pro prostředí `test`, `uat` a `prod`
+## 1.2. 🧩 Úkol: Nastavení větví pro prostředí `test`, `uat` a `prod`
 
-### 🎯 Cíl
+### 1.2.1. 🎯 Cíl
 
 Mít v Git repozitáři připravené tři stabilní větve pro deployment do tří prostředí:
 
@@ -19,15 +27,17 @@ Tyto větve se používají v CI/CD pipeline a každé prostředí má svou GitH
 
 ---
 
-### 💡 Nápověda
+### 1.2.2. 💡 Nápověda
 
 1. Vytvoř výchozí větev (`main`), pokud ještě neexistuje:
+
    ```bash
    git checkout -b main
    git push -u origin main
    ```
 
 2. Vytvoř nové větve pro `test` a `uat`, založené na `main`:
+
    ```bash
    git checkout main
    git checkout -b test
@@ -47,7 +57,7 @@ Tyto větve se používají v CI/CD pipeline a každé prostředí má svou GitH
 
 ---
 
-### ✅ Řešení
+### 1.2.3. ✅ Řešení
 
 Pokud vše proběhne správně, příkaz `git branch -r` zobrazí:
 
@@ -61,9 +71,9 @@ A v GitHub Actions se nasazení automaticky spustí při PR do těchto větví.
 
 ---
 
-## 🔄 Pracovní postup s větvemi `test`, `uat`, `main`
+## 1.3. 🔄 Pracovní postup s větvemi `test`, `uat`, `main`
 
-### 🎯 Cíl
+### 1.3.1. 🎯 Cíl
 
 Mít jasně definovaný proces vývoje a nasazování přes tři prostředí:
 
@@ -74,7 +84,7 @@ Mít jasně definovaný proces vývoje a nasazování přes tři prostředí:
 
 ---
 
-### 💡 Nápověda
+### 1.3.2. 💡 Nápověda
 
 1. Vytvoř novou vývojovou větev ze `test`:
 
@@ -102,7 +112,7 @@ Mít jasně definovaný proces vývoje a nasazování přes tři prostředí:
 
 ---
 
-### ✅ Řešení
+### 1.3.3. ✅ Řešení
 
 Ukázkový tok větví může vypadat takto:
 

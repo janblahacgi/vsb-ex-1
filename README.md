@@ -6,12 +6,12 @@
   - [1.1. TOC](#11-toc)
   - [1.2. 🧩 Úkol: Nastavení větví pro prostředí `test`, `uat` a `prod`](#12--úkol-nastavení-větví-pro-prostředí-test-uat-a-prod)
     - [1.2.1. 🎯 Cíl](#121--cíl)
+  - [Nas](#nas)
     - [1.2.2. 💡 Nápověda](#122--nápověda)
     - [1.2.3. ✅ Řešení](#123--řešení)
   - [1.3. 🔄 Pracovní postup s větvemi `test`, `uat`, `main`](#13--pracovní-postup-s-větvemi-test-uat-main)
     - [1.3.1. 🎯 Cíl](#131--cíl)
     - [1.3.2. 💡 Nápověda](#132--nápověda)
-    - [1.3.3. ✅ Řešení](#133--řešení)
 
 ## 1.2. 🧩 Úkol: Nastavení větví pro prostředí `test`, `uat` a `prod`
 
@@ -27,13 +27,15 @@ Tyto větve se používají v CI/CD pipeline a každé prostředí má svou GitH
 
 ---
 
+## Nas
+
 ### 1.2.2. 💡 Nápověda
 
 1. Vytvoř výchozí větev (`main`), pokud ještě neexistuje:
 
    ```bash
    git checkout -b main
-   git push -u origin main
+   git push --set-upstream origin main
    ```
 
 2. Vytvoř nové větve pro `test` a `uat`, založené na `main`:
@@ -41,11 +43,11 @@ Tyto větve se používají v CI/CD pipeline a každé prostředí má svou GitH
    ```bash
    git checkout main
    git checkout -b test
-   git push -u origin test
+   git push --set-upstream origin test
 
    git checkout main
    git checkout -b uat
-   git push -u origin uat
+   git push --set-upstream origin uat
    ```
 
 3. Ověř v GitHubu, že větve `test`, `uat` a `main` existují v repozitáři.
@@ -68,6 +70,20 @@ origin/uat
 ```
 
 A v GitHub Actions se nasazení automaticky spustí při PR do těchto větví.
+
+Ukázkový tok větví může vypadat takto:
+
+```bash
+feature/nova-funkce
+        ↓ PR
+     test (CI/CD na /test)
+        ↓ PR
+     uat (CI/CD na /uat)
+        ↓ PR
+     main (CI/CD na /prod)
+```
+
+Každý krok má svůj build a nasazení. Celý proces je automatizovaný a kontrolovaný přes PR schvalování a testování.
 
 ---
 
@@ -111,19 +127,3 @@ Mít jasně definovaný proces vývoje a nasazování přes tři prostředí:
 5. Po schválení UAT vytvoř PR z `uat` do `main` → nasazení do produkce.
 
 ---
-
-### 1.3.3. ✅ Řešení
-
-Ukázkový tok větví může vypadat takto:
-
-```bash
-feature/nova-funkce
-        ↓ PR
-     test (CI/CD na /test)
-        ↓ PR
-     uat (CI/CD na /uat)
-        ↓ PR
-     main (CI/CD na /prod)
-```
-
-Každý krok má svůj build a nasazení. Celý proces je automatizovaný a kontrolovaný přes PR schvalování a testování.

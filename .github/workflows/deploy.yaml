@@ -1,56 +1,38 @@
-name: Deploy Preview to GitHub Pages
-
+name: Deploy
 on:
-  pull_request:
-    branches:
-      - test
-      - uat
-      - main
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+        description: "Target environment (test, uat, prod)"
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-
-    env:
-      BUILD_ENV: ${{ github.base_ref }}
-
+    environment: ${{ inputs.environment }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Setup Environment
+        uses: ./.github/actions/setup-env
 
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v2
+      - name: Run Tests
+        uses: ./.github/actions/test
+
+      - name: Build App
+        uses: ./.github/actions/build
         with:
-          version: 9
+          environment: ${{ inputs.environment }}
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Test
-        run: pnpm test
-
-      - name: Build app
+      - name: Get BUILD_ENV from .env
+        id: get-build-env
         run: |
-          if [[ "${BUILD_ENV}" == "test" ]]; then
-            cp .env.test .env
-          elif [[ "${BUILD_ENV}" == "uat" ]]; then
-            cp .env.uat .env
-          else
-            cp .env.prod .env
-          fi
-          pnpm build
+          BUILD_ENV=$(grep "BUILD_ENV=" .env | cut -d '=' -f2 | tr -d '"' | tr -d "'")
+          echo "build_env=$BUILD_ENV" >> $GITHUB_OUTPUT
+        shell: bash
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          destination_dir: ${{ env.BUILD_ENV }}
+          destination_dir: ${{ steps.get-build-env.outputs.build_env }}

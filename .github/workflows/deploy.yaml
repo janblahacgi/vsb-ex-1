@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
       - name: Setup Environment
         uses: ./.github/actions/setup-env
 
@@ -23,16 +26,9 @@ jobs:
         with:
           environment: ${{ inputs.environment }}
 
-      - name: Get BUILD_ENV from .env
-        id: get-build-env
-        run: |
-          BUILD_ENV=$(grep "BUILD_ENV=" .env | cut -d '=' -f2 | tr -d '"' | tr -d "'")
-          echo "build_env=$BUILD_ENV" >> $GITHUB_OUTPUT
-        shell: bash
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          destination_dir: ${{ steps.get-build-env.outputs.build_env }}
+          destination_dir: ${{ inputs.environment }}
